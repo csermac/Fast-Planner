@@ -4,7 +4,7 @@
   <arg name="map_size_y" value="20.0"/>
   <arg name="map_size_z" value=" 5.0"/>
 
-  <arg name="odom_topic" value="/state_ukf/odom" />
+  <arg name="odom_topic" value="/rtabmap/odom" />
 
   <!-- main algorithm params -->
   <include file="$(find plan_manage)/launch/topo_algorithm.xml">
@@ -17,8 +17,9 @@
     <!-- camera pose: transform of camera frame in the world frame -->
     <!-- depth topic: depth image, 640x480 by default -->
     <!-- don't set cloud_topic if you already set these ones! -->
-    <arg name="camera_pose_topic" value="/pcl_render_node/camera_pose"/>
-    <arg name="depth_topic" value="/pcl_render_node/depth"/>
+    <!-- <arg name="camera_pose_topic" value="/pcl_render_node/camera_pose"/> -->
+	<arg name="camera_pose_topic" value="/mavros/vision_pose/pose"/>
+    <arg name="depth_topic" value="/r200/camera/depth/image_raw"/>
 
     <!-- topic of point cloud measurement, such as from LIDAR  -->
     <!-- don't set camera pose and depth, if you already set this one! -->
@@ -71,14 +72,14 @@
   </node>
 
   <!-- use simulator -->
-  <include file="$(find plan_manage)/launch/simulator.xml">
-    <arg name="map_size_x_" value="$(arg map_size_x)"/>
-    <arg name="map_size_y_" value="$(arg map_size_y)"/>
-    <arg name="map_size_z_" value="$(arg map_size_z)"/>
-    <arg name="c_num" value="150"/>
-    <arg name="p_num" value="50"/>
-
-    <arg name="odometry_topic" value="$(arg odom_topic)" />
-  </include>
+  <!-- <include file="$(find plan_manage)/launch/simulator.xml"> -->
+  <!--   <arg name="map_size_x_" value="$(arg map_size_x)"/> -->
+  <!--   <arg name="map_size_y_" value="$(arg map_size_y)"/> -->
+  <!--   <arg name="map_size_z_" value="$(arg map_size_z)"/> -->
+  <!--   <arg name="c_num" value="150"/> -->
+  <!--   <arg name="p_num" value="50"/> -->
+  <!---->
+  <!--   <arg name="odometry_topic" value="$(arg odom_topic)" /> -->
+  <!-- </include> -->
 
 </launch>
