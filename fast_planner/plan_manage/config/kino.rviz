@@ -528,7 +528,7 @@ Visualization Manager:
   Global Options:
     Background Color: 255; 253; 224
     Default Light: true
-    Fixed Frame: world
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
