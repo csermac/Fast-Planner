@@ -6,6 +6,9 @@
 
   <arg name="odom_topic" value="/rtabmap/odom" />
 
+  <!-- execute the script that republishes the messages with the correct message type -->
+  <node pkg="pos_cmd_2_pos_targ" type="pos_conv.py" name="pos_conv" />
+
   <!-- main algorithm params -->
   <include file="$(find plan_manage)/launch/topo_algorithm.xml">
     <!-- size of map -->
