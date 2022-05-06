@@ -4,7 +4,8 @@
   <arg name="map_size_y" value="20.0"/>
   <arg name="map_size_z" value=" 5.0"/>
 
-  <arg name="odom_topic" value="/rtabmap/odom" />
+  <!-- <arg name="odom_topic" value="/rtabmap/odom" /> -->
+  <arg name="odom_topic" default="/mavros/local_position/odom" />
 
   <!-- execute the script that republishes the messages with the correct message type -->
   <node pkg="pos_cmd_2_pos_targ" type="pos_conv.py" name="pos_conv" />
