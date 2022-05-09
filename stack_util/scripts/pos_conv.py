@@ -8,12 +8,15 @@ class Conversion():
 
     def __init__(self):
         self.pos_cmd_sub = rospy.Subscriber('/planning/pos_cmd', PositionCommand, self.pos_cmd_cb, queue_size=10)
-        self.att_pub = rospy.Publisher('/mavros/setpoint_raw/local', PositionTarget, queue_size=10)
+        # self.att_pub = rospy.Publisher('/mavros/setpoint_raw/local', PositionTarget, queue_size=10)
+        # this is the topic geometric_controller subscribes to for the trajectory
+        self.att_pub = rospy.Publisher('/command/trajectory', PositionTarget, queue_size=10)
 
     def pos_cmd_cb(self, msg):
         goal_att = PositionTarget()
         # according to the same programme as below it is 1 in uint
         goal_att.coordinate_frame = 1
+        goal_att.header.stamp = rospy.Time.now()
         # velocity control mask computed from the cpp programme in offboard_safety
         goal_att.type_mask = 3064
         goal_att.position.x = msg.position.x
