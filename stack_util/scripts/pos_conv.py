@@ -47,7 +47,7 @@ class Conversion():
         vel = Twist()
         vel.linear = msg.velocity
         # not sure if the vertical axes are aligned
-        vel.angular.z = msg.yaw_dot
+        # vel.angular.z = msg.yaw_dot
 
         acc = Twist()
         acc.linear = msg.acceleration
