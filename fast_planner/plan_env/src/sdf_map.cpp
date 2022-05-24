@@ -832,10 +832,25 @@ void SDFMap::odomCallback(const nav_msgs::OdometryConstPtr& odom) {
   md_.has_odom_ = true;
 }
 
+// Create a rotation matrix (euler angles) for the point cloud.
+// It is going to be rotated directly after the callback to try and fix the
+// problem
+Eigen::Affine3f create_rotation_matrix(double ax, double ay, double az) {
+	Eigen::Affine3f rx = Eigen::Affine3f(Eigen::AngleAxisf(ax, Eigen::Vector3f(1, 0, 0)));
+	Eigen::Affine3f ry = Eigen::Affine3f(Eigen::AngleAxisf(ay, Eigen::Vector3f(0, 1, 0)));
+	Eigen::Affine3f rz = Eigen::Affine3f(Eigen::AngleAxisf(az, Eigen::Vector3f(0, 0, 1)));
+	return rz * ry * rx;
+}
+
+Eigen::Affine3f rot_cloud = create_rotation_matrix(-1.57,0,-1.57);
+
 void SDFMap::cloudCallback(const sensor_msgs::PointCloud2ConstPtr& img) {
 
+  pcl::PointCloud<pcl::PointXYZ> latest_cloud_norot;
   pcl::PointCloud<pcl::PointXYZ> latest_cloud;
   pcl::fromROSMsg(*img, latest_cloud);
+
+  pcl::transformPointCloud(latest_cloud_norot, latest_cloud, rot_cloud),
 
   md_.has_cloud_ = true;
 
