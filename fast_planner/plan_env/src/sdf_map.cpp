@@ -842,7 +842,7 @@ Eigen::Affine3f create_rotation_matrix(double ax, double ay, double az) {
 	return rz * ry * rx;
 }
 
-Eigen::Affine3f rot_cloud = create_rotation_matrix(-1.57,0,-1.57);
+Eigen::Affine3f rot_cloud = create_rotation_matrix(-1.57,-1.57,-1.57);
 
 void SDFMap::cloudCallback(const sensor_msgs::PointCloud2ConstPtr& img) {
 
